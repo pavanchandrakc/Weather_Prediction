@@ -34,8 +34,8 @@ def train_model():
     print("Splitting data...")
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
-    print("Training Random Forest Regressor...")
-    model = RandomForestRegressor(n_estimators=100, random_state=42)
+    print("Training Random Forest Regressor (Optimized for cloud hosting)...")
+    model = RandomForestRegressor(n_estimators=20, max_depth=15, min_samples_leaf=5, random_state=42)
     model.fit(X_train, y_train)
     
     print(f"Training R^2 Score: {model.score(X_train, y_train):.4f}")
