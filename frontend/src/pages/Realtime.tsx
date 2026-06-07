@@ -35,15 +35,15 @@ export default function Realtime() {
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center mb-10">
-        <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl flex items-center justify-center gap-3">
-          <Cloud className="w-10 h-10 text-cyan-400" /> Live Weather Forecast
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl flex items-center justify-center gap-3">
+          <Cloud className="w-10 h-10 text-cyan-500" /> Live Weather Forecast
         </h1>
-        <p className="mt-4 text-lg text-slate-400">
+        <p className="mt-4 text-lg text-slate-600">
           Get real-time weather conditions for any city worldwide using OpenWeatherMap.
         </p>
       </div>
 
-      <Card className="bg-slate-900/50 border-white/10 backdrop-blur">
+      <Card className="bg-white/90 border-slate-200 backdrop-blur shadow-sm">
         <CardContent className="pt-6">
           <form onSubmit={fetchWeather} className="flex gap-4">
             <div className="relative flex-1">
@@ -52,44 +52,44 @@ export default function Realtime() {
                 placeholder="Enter city name (e.g., Mumbai, London, Tokyo)" 
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="pl-10 bg-slate-800/50 border-white/10 text-white h-12 text-lg"
+                className="pl-10 bg-white border-slate-200 text-slate-900 h-12 text-lg focus-visible:ring-cyan-500"
               />
             </div>
-            <Button type="submit" disabled={loading || !city.trim()} className="h-12 px-8 bg-cyan-600 hover:bg-cyan-700 text-white transition-all shadow-lg shadow-cyan-500/20">
+            <Button type="submit" disabled={loading || !city.trim()} className="h-12 px-8 bg-cyan-600 hover:bg-cyan-700 text-white transition-all shadow-lg shadow-cyan-500/30">
               {loading ? 'Searching...' : 'Get Weather'}
             </Button>
           </form>
-          {error && <p className="text-rose-400 mt-4 text-center">{error}</p>}
+          {error && <p className="text-rose-600 mt-4 text-center">{error}</p>}
         </CardContent>
       </Card>
 
       {weatherData && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <Card className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border-cyan-500/30 backdrop-blur overflow-hidden relative">
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl"></div>
+          <Card className="bg-gradient-to-br from-cyan-50 to-blue-50 border-cyan-200 backdrop-blur overflow-hidden relative shadow-sm">
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-cyan-400/20 rounded-full blur-3xl"></div>
             <CardHeader>
-              <CardTitle className="text-2xl text-white flex items-center justify-between">
+              <CardTitle className="text-2xl text-slate-800 flex items-center justify-between">
                 <span>{weatherData.name}, {weatherData.sys.country}</span>
-                <MapPin className="w-6 h-6 text-cyan-400" />
+                <MapPin className="w-6 h-6 text-cyan-600" />
               </CardTitle>
-              <CardDescription className="text-cyan-200 capitalize text-lg">
+              <CardDescription className="text-cyan-700 capitalize text-lg">
                 {weatherData.weather[0].description}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-6 mt-4">
-                <div className="bg-slate-950/50 p-4 rounded-2xl border border-white/5">
+                <div className="bg-white/50 p-4 rounded-2xl border border-slate-200 shadow-sm">
                   <img 
                     src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} 
                     alt="Weather Icon" 
-                    className="w-20 h-20"
+                    className="w-20 h-20 drop-shadow-md"
                   />
                 </div>
                 <div>
-                  <div className="text-6xl font-bold text-white tracking-tighter">
-                    {Math.round(weatherData.main.temp)}°<span className="text-3xl text-cyan-400">C</span>
+                  <div className="text-6xl font-bold text-slate-900 tracking-tighter">
+                    {Math.round(weatherData.main.temp)}°<span className="text-3xl text-cyan-600">C</span>
                   </div>
-                  <div className="text-slate-300 mt-1 flex gap-4">
+                  <div className="text-slate-600 mt-1 flex gap-4 font-medium">
                     <span>H: {Math.round(weatherData.main.temp_max)}°</span>
                     <span>L: {Math.round(weatherData.main.temp_min)}°</span>
                   </div>
@@ -99,35 +99,35 @@ export default function Realtime() {
           </Card>
 
           <div className="grid grid-cols-2 gap-4">
-            <Card className="bg-slate-900/50 border-white/10 backdrop-blur">
+            <Card className="bg-white/90 border-slate-200 backdrop-blur shadow-sm">
               <CardContent className="p-6 flex flex-col items-center justify-center text-center h-full">
-                <Thermometer className="w-8 h-8 text-rose-400 mb-2" />
-                <div className="text-sm text-slate-400">Feels Like</div>
-                <div className="text-2xl font-bold text-white">{Math.round(weatherData.main.feels_like)}°C</div>
+                <Thermometer className="w-8 h-8 text-rose-500 mb-2" />
+                <div className="text-sm text-slate-500 font-medium">Feels Like</div>
+                <div className="text-2xl font-bold text-slate-800">{Math.round(weatherData.main.feels_like)}°C</div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/50 border-white/10 backdrop-blur">
+            <Card className="bg-white/90 border-slate-200 backdrop-blur shadow-sm">
               <CardContent className="p-6 flex flex-col items-center justify-center text-center h-full">
-                <Droplets className="w-8 h-8 text-blue-400 mb-2" />
-                <div className="text-sm text-slate-400">Humidity</div>
-                <div className="text-2xl font-bold text-white">{weatherData.main.humidity}%</div>
+                <Droplets className="w-8 h-8 text-blue-500 mb-2" />
+                <div className="text-sm text-slate-500 font-medium">Humidity</div>
+                <div className="text-2xl font-bold text-slate-800">{weatherData.main.humidity}%</div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/50 border-white/10 backdrop-blur">
+            <Card className="bg-white/90 border-slate-200 backdrop-blur shadow-sm">
               <CardContent className="p-6 flex flex-col items-center justify-center text-center h-full">
-                <Wind className="w-8 h-8 text-emerald-400 mb-2" />
-                <div className="text-sm text-slate-400">Wind Speed</div>
-                <div className="text-2xl font-bold text-white">{weatherData.wind.speed} m/s</div>
+                <Wind className="w-8 h-8 text-emerald-500 mb-2" />
+                <div className="text-sm text-slate-500 font-medium">Wind Speed</div>
+                <div className="text-2xl font-bold text-slate-800">{weatherData.wind.speed} m/s</div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-900/50 border-white/10 backdrop-blur">
+            <Card className="bg-white/90 border-slate-200 backdrop-blur shadow-sm">
               <CardContent className="p-6 flex flex-col items-center justify-center text-center h-full">
                 <Cloud className="w-8 h-8 text-slate-400 mb-2" />
-                <div className="text-sm text-slate-400">Cloudiness</div>
-                <div className="text-2xl font-bold text-white">{weatherData.clouds.all}%</div>
+                <div className="text-sm text-slate-500 font-medium">Cloudiness</div>
+                <div className="text-2xl font-bold text-slate-800">{weatherData.clouds.all}%</div>
               </CardContent>
             </Card>
           </div>
