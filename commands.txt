@@ -1,67 +1,24 @@
-=======================================================
-AeroCast - Weather Prediction Application
-=======================================================
+# First Time Setup
 
-This repository contains a full-stack weather prediction application powered by Machine Learning.
-It is divided into two main parts:
-1. Backend (Python/FastAPI + Scikit-Learn)
-2. Frontend (React + Vite + TailwindCSS + shadcn/ui)
+# Backend
+cd backend
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+python train.py
 
--------------------------------------------------------
-HOW THE REPOSITORY WORKS
--------------------------------------------------------
-- The Machine Learning model (Random Forest Regressor) learns historical rainfall patterns from `india_weather_rainfall_data.xlsx`.
-- The FastAPI backend serves the trained model (`model.pkl`) via a `/predict` endpoint. It also provides a `/data/summary` endpoint for the frontend dashboard.
-- The React frontend provides a beautiful UI for users to interact with the ML model, visualize historical data, and see real-time weather using the OpenWeatherMap API.
+# Frontend
+cd ../frontend
+npm install
 
--------------------------------------------------------
-1. BACKEND SETUP & COMMANDS
--------------------------------------------------------
-Open a terminal in the root directory and navigate to the backend folder:
-> cd backend
 
-Install Python dependencies:
-> pip install -r requirements.txt
+# Regular Start
 
-Train the Machine Learning Model (Run this at least once):
-> python train.py
-(This reads the .xlsx dataset, trains the Random Forest model, and generates `model.pkl` and `summary_stats.json`)
+# Backend (Terminal 1)
+cd backend
+.\venv\Scripts\activate
+uvicorn main:app --reload
 
-Start the FastAPI Server:
-> uvicorn main:app --reload
-(The backend will run on http://127.0.0.1:8000. You can view the API documentation at http://127.0.0.1:8000/docs)
-
--------------------------------------------------------
-2. FRONTEND SETUP & COMMANDS
--------------------------------------------------------
-Open a new terminal in the root directory and navigate to the frontend folder:
-> cd frontend
-
-Install Node dependencies:
-> npm install
-
-Set up your Environment Variables:
-1. Open the `frontend/.env` file.
-2. Replace `YOUR_OPENWEATHERMAP_API_KEY` with your actual API key from openweathermap.org.
-
-Start the React Development Server:
-> npm run dev
-(The frontend will start on http://localhost:5173. Open this in your browser to view the app).
-
-Build for Production (Optional):
-> npm run build
-(This compiles the React application into optimized static HTML/CSS/JS files inside the `frontend/dist/` directory).
-
--------------------------------------------------------
-3. QUICK START FLOW
--------------------------------------------------------
-To get everything running from scratch, you need two terminals:
-
-Terminal 1 (Backend):
-> cd backend
-> python train.py
-> uvicorn main:app --reload
-
-Terminal 2 (Frontend):
-> cd frontend
-> npm run dev
+# Frontend (Terminal 2)
+cd frontend
+npm run dev

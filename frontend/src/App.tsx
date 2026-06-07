@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import Prediction from './pages/Prediction';
-import Realtime from './pages/Realtime';
+import Dashboard from './pages/Dashboard.tsx';
+import Prediction from './pages/Prediction.tsx';
+import Realtime from './pages/Realtime.tsx';
 import { CloudRain, BarChart3, CloudLightning } from 'lucide-react';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
                   <CloudRain className="w-6 h-6 text-indigo-400" />
                 </div>
                 <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-                  AeroCast
+                  Weather Prediction
                 </span>
               </div>
               <div className="flex space-x-1">
